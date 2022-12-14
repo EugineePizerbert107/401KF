@@ -71,7 +71,7 @@ function ContribSlider(props) {
                             inputProps={{
                                 step: 10,
                                 min: 0,
-                                max: 100,
+                                max: 25,
                                 type: 'number',
                                 'aria-labelledby': 'input-slider',
                             }}
@@ -81,6 +81,8 @@ function ContribSlider(props) {
                         <Slider
                             defaultValue={15}
                             getAriaValueText={valuetext}
+                            min={0}
+                            max={25}
                             aria-labelledby="discrete-slider-always"
                             onChange={handleSliderChange}
                             value={typeof value === 'number' ? value : 0}
