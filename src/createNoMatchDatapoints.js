@@ -1,7 +1,11 @@
 export default function({contribPercent, annualSalary, annualRaise, currentAge, retirementAge, currentBalance, annualRateOfReturn, employerMatch, employerMatchCap}) {
+    
+    let data = []
 
     let valArray = []
 
+    let totalEarn = 0
+    
     for (let i = 0; i < retirementAge - currentAge; i++) {
 
         let effectiveRaiseForYear = (1 + (annualRaise/100)) ** i
@@ -21,8 +25,13 @@ export default function({contribPercent, annualSalary, annualRaise, currentAge, 
 
         valArray.push(endOfYearTotalAfterInterest)
 
+        totalEarn += endOfYearTotalAfterInterest
+
     }
 
-    return valArray
+    data["totalEarn"] = totalEarn
+    data["valArray"] = valArray
+
+    return data
 
 }

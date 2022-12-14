@@ -1,8 +1,14 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
-import { Paper, Typography } from '@material-ui/core'
+import { Paper, Typography, Grid } from '@material-ui/core'
+
+let totalContribute = 0
+let totalEarn = 0
 
 function BarChart(props) {
+
+    totalContribute = props.matchData.totalContribute
+    totalEarn = props.matchData.totalEarn
 
     let data = {
         labels: props.labels,
@@ -11,7 +17,7 @@ function BarChart(props) {
                 backgroundColor: 'rgba(252, 88, 88, 0.5)',
                 borderColor: 'rgb(252, 88, 88)',
                 category: "No employer match",
-                data: props.noMatchData.map(val => {
+                data: props.noMatchData.valArray.map(val => {
                     return Math.trunc(val)
                 }),
                 label: "No employer match",
@@ -20,7 +26,7 @@ function BarChart(props) {
                 backgroundColor: 'rgba(66, 183, 255, 0.5)',
                 borderColor: 'rgb(66, 183, 255)',
                 category: "With employer match",
-                data: props.matchData.map(val => {
+                data: props.matchData.valArray.map(val => {
                     return Math.trunc(val)
                 }),
                 label: "With employer match"
@@ -51,17 +57,31 @@ function BarChart(props) {
                 }
             }]
         }
-   }
 
+        
+   }
+   console.log("Y", options);
     return (
         <Paper style={{marginTop: '5%', marginBottom: '5%', marginLeft: '10%', marginRight: '10%'}}>
-            <Typography gutterBottom>
-                Total contributions :
-            </Typography>
-            <Typography gutterBottom>
-                Total earned: 
-            </Typography>
-
+            <Grid container>
+                <Grid item xs={6} style={{padding: '25px' }}>
+                    <Typography component="p" variant="h4">
+                        ${parseInt(props.matchData.totalEarn - props.noMatchData.totalEarn)}
+                    </Typography>
+                    <Typography color="textSecondary">
+                        Actual contributions 
+                    </Typography>
+                </Grid>
+                <Grid item xs={6} style={{padding: '25px'}}>
+                    <Typography component="p" variant="h4">
+                        ${parseInt(props.matchData.totalEarn)}
+                    </Typography>
+                    <Typography color="textSecondary">
+                        Estimated balance at retirement
+                    </Typography>
+                </Grid>
+            </Grid>
+            
             <Bar
                 data={data}
                 options={options}

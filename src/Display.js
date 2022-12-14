@@ -24,14 +24,14 @@ class Display extends React.Component {
         this.classes = props.classes
         this.state = {
             contribPercent: 20,
-            annualSalary: 70000,
+            annualSalary: 100000,
             annualRaise: 5,
             currentAge: 27,
-            retirementAge: 62,
-            currentBalance: 50000,
+            retirementAge: 55,
+            currentBalance: 10000,
             annualRateOfReturn: 7,
             riskTolerance: 1,
-            employerMatch: 100,
+            employerMatch: 25,
             employerMatchCap: 6
         }
 
@@ -51,6 +51,7 @@ class Display extends React.Component {
     }
 
     handleAnnualSalarySliderChange(val) {
+        console.log("handleAnnualSalarySliderChange", val);
         this.setState({...this.state, annualSalary: val})
     }
 
@@ -107,7 +108,7 @@ class Display extends React.Component {
                             <RateOfReturnSlider slide={this.handleRateOfReturnSlider}/>
                             <Divider style={{marginTop: '20px', marginBottom:'20px'}}/>
                             <Typography variant="h5" gutterBottom>
-                                401(k) Employer Match
+                                Employer
                             </Typography>
                             <EmployerMatchSlider slide={this.handleEmployerMatchSlider}/>
                             <EmployerMatchCapSlider slide={this.handleEmployerMatchCapSlider}/>

@@ -13,19 +13,19 @@ function EmployerMatchSlider(props) {
         },
         {
             value: 25,
-            label: '100%',
+            label: '25%',
         },
         {
             value: 50,
-            label: '200%',
+            label: '50%',
         },
         {
             value: 75,
-            label: '300%',
+            label: '75%',
         },
         {
             value: 100,
-            label: '400%',
+            label: '100%',
         }
     ];
 
@@ -38,12 +38,12 @@ function EmployerMatchSlider(props) {
     };
 
     const handleSliderChange = (event, newValue) => {
-        props.slide(newValue * 4)
+        props.slide(newValue)
         setValue(newValue);
     };
 
     const handleInputChange = (event) => {
-        setValue(event.target.value === '' ? '' : Number(event.target.value * 4));
+        setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
 
     return (
@@ -54,7 +54,7 @@ function EmployerMatchSlider(props) {
                 <Grid container spacing={4}>
                     <Grid item xs={3}>
                         <Input 
-                            value={value * 4}
+                            value={value}
                             margin="dense"
                             onChange={handleInputChange}
                             onBlur={handleBlur}
@@ -69,8 +69,8 @@ function EmployerMatchSlider(props) {
                     </Grid>
                     <Grid item xs={8}>
                         <Slider
-                            defaultValue={50}
-                            valueLabelFormat={(x) => x * 4}
+                            defaultValue={25}
+                            valueLabelFormat={(x) => x}
                             onChange={handleSliderChange}
                             value={typeof value === 'number' ? value : 0}
                             step={1}

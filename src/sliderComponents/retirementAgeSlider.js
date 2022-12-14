@@ -5,7 +5,7 @@ import ValueLabelComponent from './valueLabelComponent'
 
 function RetirementAgeSlider(props) {
 
-    const [value, setValue] = React.useState(30);
+    const [value, setValue] = React.useState(55);
 
     const marks = [
         {

@@ -12,20 +12,20 @@ function EmployerMatchCapSlider(props) {
             label: '0%',
         },
         {
-            value: 25,
-            label: '25%',
+            value: 2.5,
+            label: '2.5%',
         },
         {
-            value: 50,
-            label: '50%',
+            value: 5,
+            label: '5%',
         },
         {
-            value: 75,
-            label: '75%',
+            value: 7.5,
+            label: '7.5%',
         },
         {
-            value: 100,
-            label: '100%',
+            value: 10,
+            label: '10%',
         }
     ];
 
@@ -36,8 +36,8 @@ function EmployerMatchCapSlider(props) {
     const handleBlur = () => {
         if (value < 0) {
           setValue(0);
-        } else if (value > 100) {
-          setValue(100);
+        } else if (value > 10) {
+          setValue(10);
         }
     };
 
@@ -53,7 +53,7 @@ function EmployerMatchCapSlider(props) {
     return (
             <div>
                 <Typography gutterBottom>
-                    Employer match ends
+                    Employer contributions
                 </Typography>
                 <Grid container spacing={4}>
                     <Grid item xs={3}>
@@ -65,7 +65,7 @@ function EmployerMatchCapSlider(props) {
                             inputProps={{
                                 step: 1,
                                 min: 0,
-                                max: 100,
+                                max: 10,
                                 type: 'number',
                                 'aria-labelledby': 'input-slider',
                             }}
@@ -74,7 +74,7 @@ function EmployerMatchCapSlider(props) {
                     <Grid item xs={8}>
                         <Slider
                             min={0}
-                            max={100}
+                            max={10}
                             defaultValue={6}
                             getAriaValueText={valuetext}
                             aria-labelledby="discrete-slider-always"

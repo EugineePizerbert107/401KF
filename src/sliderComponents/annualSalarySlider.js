@@ -11,16 +11,16 @@ function SalarySlider(props) {
 
     const marks = [
         {
-              value: 3,
-              label: '$1K',
+              value: 0,
+              label: '$1',
         },
         {
-             value: 4,
-            label: '$10K'
+             value: 2,
+            label: '$100'
         },
         {
-            value: 5,
-            label: '$100K',
+            value: 4,
+            label: '$10K',
         },
         {
             value: 6,
@@ -34,8 +34,8 @@ function SalarySlider(props) {
     }
 
     const handleBlur = () => {
-        if (value < 3) {
-          setValue(3);
+        if (value < 0) {
+          setValue(0);
         } else if (value > 6) {
           setValue(6);
         }
@@ -82,7 +82,7 @@ function SalarySlider(props) {
                             InputProps={{
                                 inputComponent: NumberFormatCustom,
                                 tep: 1000,
-                                min: 1000,
+                                min: 1,
                                 max: 1000000
                             }}
                         />
@@ -90,7 +90,7 @@ function SalarySlider(props) {
                     <Grid item xs={8}>
                         <Slider
                             defaultValue={5}
-                            min={3}
+                            min={0}
                             max={6}
                             valueLabelFormat={(x) => x * 4}
                             onChange={handleSliderChange}
