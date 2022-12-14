@@ -48,9 +48,6 @@ function EmployerMatchSlider(props) {
 
     return (
             <div>
-                <Typography gutterBottom>
-                    Employer match
-                </Typography>
                 <Grid container spacing={4}>
                     <Grid item xs={3}>
                         <Input 

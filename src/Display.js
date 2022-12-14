@@ -1,6 +1,6 @@
 import React from 'react'
 // import { compose } from 'redux'
-import { Paper, Slider, Grid, Typography, Divider } from '@material-ui/core'
+import { Paper, Slider, Grid, Typography, Divider, Select, MenuItem, InputLabel } from '@material-ui/core'
 import { Line } from 'react-chartjs-2'
 import ContribSlider from './sliderComponents/contribPercentSlider'
 import SalarySlider from './sliderComponents/annualSalarySlider'
@@ -32,7 +32,8 @@ class Display extends React.Component {
             annualRateOfReturn: 7,
             riskTolerance: 1,
             employerMatch: 25,
-            employerMatchCap: 6
+            employerMatchCap: 6,
+            employerSetType: `0`,
         }
 
         this.handleContribSliderChange = this.handleContribSliderChange.bind(this)
@@ -44,6 +45,7 @@ class Display extends React.Component {
         this.handleRateOfReturnSlider = this.handleRateOfReturnSlider.bind(this)
         this.handleEmployerMatchSlider = this.handleEmployerMatchSlider.bind(this)
         this.handleEmployerMatchCapSlider = this.handleEmployerMatchCapSlider.bind(this)
+        this.handleChangeEmployer = this.handleChangeEmployer.bind(this)
     }
 
     handleContribSliderChange(val) {
@@ -51,7 +53,6 @@ class Display extends React.Component {
     }
 
     handleAnnualSalarySliderChange(val) {
-        console.log("handleAnnualSalarySliderChange", val);
         this.setState({...this.state, annualSalary: val})
     }
 
@@ -88,6 +89,12 @@ class Display extends React.Component {
         this.setState({...this.state, employerMatchCap: val})
     }
 
+    handleChangeEmployer(val) {
+        console.log("employerSetType", val.target.value)
+
+        this.setState({...this.state, employerSetType: val.target.value})
+    }
+
     render() {
 
         createNoMatchDatapoints(this.state)
@@ -110,8 +117,20 @@ class Display extends React.Component {
                             <Typography variant="h5" gutterBottom>
                                 Employer
                             </Typography>
-                            <EmployerMatchSlider slide={this.handleEmployerMatchSlider}/>
-                            <EmployerMatchCapSlider slide={this.handleEmployerMatchCapSlider}/>
+
+                            <Select 
+                                value={this.state.employerSetType} 
+                                onChange={this.handleChangeEmployer}>
+
+                                <MenuItem value={0}>EmployerMatchSlider</MenuItem>
+                                <MenuItem value={1}>EmployerMatchCapSlider</MenuItem>                                
+                            </Select>
+                            {
+                                this.state.employerSetType == 0 ? 
+                                    <EmployerMatchSlider slide={this.handleEmployerMatchSlider}/>
+                                :
+                                    <EmployerMatchCapSlider slide={this.handleEmployerMatchCapSlider}/>
+                            }
                         </Grid>
                         <Grid item xs={7}>
                             <BarChart matchData={createMatchDatapoints(this.state)} noMatchData={createNoMatchDatapoints(this.state)} labels={createLabels(this.state)}/>

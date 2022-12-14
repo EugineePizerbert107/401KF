@@ -52,9 +52,6 @@ function EmployerMatchCapSlider(props) {
 
     return (
             <div>
-                <Typography gutterBottom>
-                    Employer contributions
-                </Typography>
                 <Grid container spacing={4}>
                     <Grid item xs={3}>
                         <Input 

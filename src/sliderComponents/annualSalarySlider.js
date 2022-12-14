@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { Slider, Typography, Input, Grid, Tooltip, TextField } from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
@@ -7,87 +7,131 @@ import NumberFormat from 'react-number-format'
 
 function SalarySlider(props) {
 
-    const [value, setValue] = React.useState(5);
-
-    const marks = [
-        {
-              value: 0,
-              label: '$1',
-        },
-        {
-             value: 2,
-            label: '$100'
-        },
-        {
-            value: 4,
-            label: '$10K',
-        },
-        {
-            value: 6,
-            label: '$1M',
-        }
-    ];
-
-    function valuetext(value) {
-
-        return `$${Math.floor(value)}`
-    }
-
-    const handleBlur = () => {
-        if (value < 0) {
-          setValue(0);
-        } else if (value > 6) {
-          setValue(6);
-        }
-    };
-
-    const handleSliderChange = (event, newValue) => {
-        props.slide(Math.floor(10 ** newValue))
-        setValue(newValue)
-    };
+    const [value, setValue] = React.useState(100000);
+    
+    const addCommas = (num) =>
+        num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
 
     const handleInputChange = (event) => {
-        setValue(event.value === '' ? '' : Number(event.value));
+
+        let newValue = removeNonNumeric(event.target.value)
+
+        if( newValue > 1000000 )
+            newValue = 1000000
+        if( newValue < 0 )
+            newValue = 0
+
+        setValue(event.target.value === '' ? '' : newValue)
+        props.slide(newValue)
     };
 
-    function NumberFormatCustom(props) {
-        const { inputRef, onChange, ...other} = props
+    const handleInputChangeHour = (event) => {
+        
+        let newValue = removeNonNumeric(event.target.value) * 40 * 52
+
+        if( newValue > 1000000 )
+            newValue = 1000000
+        if( newValue < 0 )
+            newValue = 0
+        
+        setValue(event.target.value === '' ? '' : newValue)
+        props.slide(newValue)
+    };
+
+    const handleInputChangeBiWeek = (event) => {
+        
+        let newValue = removeNonNumeric(event.target.value) * 40 * 2
+
+        if( newValue > 1000000 )
+            newValue = 1000000
+        if( newValue < 0 )
+            newValue = 0
+
+        setValue(event.target.value === '' ? '' : newValue);
+        props.slide(newValue)
+    };
+
+    const NumberFormatCustom = (props) => {
+
+        const { inputRef,  ...other} = props
 
         return (
                 <NumberFormat
                     {...other}
                     getInputRef={inputRef}
-                    onValueChange={(values) => console.log(values)}
+                    // onValueChange={(values) => console.log(values)}
                     thousandSeparator
                     isNumericString
-                    prefix="$"
+                    // prefix="$"
                 />
         )
     }
 
     return (
             <div>
-                <Typography gutterBottom>
-                    Annual salary
-                </Typography>
+                
                 <Grid container spacing={4}>
-                    <Grid item xs={3}>
+                    <Grid item xs={4}>
+                        <Typography gutterBottom>
+                            Annual salary
+                        </Typography>
                         <TextField
-                            value={Math.floor(10**value)}
+                            value={value}
                             onChange={handleInputChange}
                             margin="dense"
                             fullWidth
                             name="numberformat"
                             id="formatted-numberformat-input"
-                            InputProps={{
-                                inputComponent: NumberFormatCustom,
-                                tep: 1000,
-                                min: 1,
-                                max: 1000000
-                            }}
+                            
+                            // InputProps={{
+                            //     inputComponent: NumberFormatCustom,
+                            //     tep: 1000,
+                            //     min: 1,
+                            //     max: 1000000
+                            // }}
                         />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={4}>
+                        <Typography gutterBottom>
+                            Hourly salary
+                        </Typography>
+                        <TextField
+                            value={parseInt(value/52/40) }
+                            onChange={handleInputChangeHour}
+                            margin="dense"
+                            fullWidth
+                            name="numberformat1"
+                            id="formatted-numberformat-input1"
+                            // InputProps={{
+                            //     inputComponent: NumberFormatCustom,
+                            //     tep: 1000,
+                            //     min: 1,
+                            //     max: 1000000
+                            // }}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Typography gutterBottom>
+                            BiWeek salary
+                        </Typography>
+                        <TextField
+                            value={parseInt(value/52/2)}
+                            onChange={handleInputChangeBiWeek}
+                            margin="dense"
+                            fullWidth
+                            name="numberformat2"
+                            id="formatted-numberformat-input2"
+                            // InputProps={{
+                            //     inputComponent: NumberFormatCustom,
+                            //     tep: 1000,
+                            //     min: 1,
+                            //     max: 1000000
+                            // }}
+                        />
+                    </Grid>
+                    {/* <Grid item xs={8}>
                         <Slider
                             defaultValue={5}
                             min={0}
@@ -101,7 +145,7 @@ function SalarySlider(props) {
                             ValueLabelComponent={ValueLabelComponent}
                             valueLabelFormat={(x) => `$${Math.trunc(x/1000)}K`}
                         />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </div>
     )
