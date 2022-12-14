@@ -14,20 +14,24 @@ function ContribSlider(props) {
           label: '0%',
         },
         {
-          value: 25,
-          label: '25%',
+          value: 5,
+          label: '5%',
         },
         {
-          value: 50,
-          label: '50%',
+          value: 10,
+          label: '10%',
         },
         {
-          value: 75,
-          label: '75%',
+          value: 15,
+          label: '15%',
         },
         {
-            value: 100,
-            label: '100%',
+            value: 20,
+            label: '20%',
+          },
+          {
+            value: 25,
+            label: '25%',
           }
     ];
 
@@ -38,8 +42,8 @@ function ContribSlider(props) {
     const handleBlur = () => {
         if (value < 0) {
           setValue(0);
-        } else if (value > 100) {
-          setValue(100);
+        } else if (value > 25) {
+          setValue(25);
         }
     };
 
