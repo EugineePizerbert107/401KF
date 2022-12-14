@@ -1,5 +1,6 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
+import { Paper, Typography } from '@material-ui/core'
 
 function BarChart(props) {
 
@@ -53,10 +54,20 @@ function BarChart(props) {
    }
 
     return (
-        <Bar
-        data={data}
-        options={options}
-        />
+        <Paper style={{marginTop: '5%', marginBottom: '5%', marginLeft: '10%', marginRight: '10%'}}>
+            <Typography gutterBottom>
+                Total contributions :
+            </Typography>
+            <Typography gutterBottom>
+                Total earned: 
+            </Typography>
+
+            <Bar
+                data={data}
+                options={options}
+            />
+        </Paper>
+        
     )
 
 }
