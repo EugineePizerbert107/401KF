@@ -1,12 +1,12 @@
 import React from 'react'
 import { Slider, Typography, Input, Grid } from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
-
+import { useCookies } from 'react-cookie'
 
 
 function ContribSlider(props) {
 
-    const [value, setValue] = React.useState(20);
+    const [value, setValue] = React.useState(Number(useCookies()[0].contribPercent || 20));
 
     const marks = [
         {

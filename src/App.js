@@ -1,9 +1,12 @@
 import React from 'react';
 import Display from './Display'
+import { CookiesProvider } from 'react-cookie';
 
 function App() {
   return (
-    <Display />
+    <CookiesProvider>
+      <Display />
+    </CookiesProvider>
   );
 }
 

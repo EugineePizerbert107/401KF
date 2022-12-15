@@ -1,11 +1,11 @@
 import React from 'react'
 import { Slider, Typography, Input, Grid } from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
-
+import { useCookies } from 'react-cookie'
 
 function RetirementAgeSlider(props) {
 
-    const [value, setValue] = React.useState(55);
+    const [value, setValue] = React.useState(Number(useCookies()[0].retirementAge || 55));
 
     const marks = [
         {

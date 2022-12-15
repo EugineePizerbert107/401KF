@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/styles'
 import { Slider, Typography, Input, Grid, Tooltip, TextField } from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
 import NumberFormat from 'react-number-format'
-
+import { useCookies } from 'react-cookie'
 
 function SalarySlider(props) {
 
-    const [value, setValue] = React.useState(100000);
+    const [value, setValue] = React.useState(Number(useCookies()[0].annualSalary || 100000));
     
     const addCommas = (num) =>
         num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

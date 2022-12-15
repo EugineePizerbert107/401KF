@@ -2,10 +2,11 @@ import React from 'react'
 import { Slider, Typography, Input, Grid, TextField} from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
 import NumberFormat from 'react-number-format'
+import { useCookies } from 'react-cookie'
 
 function CurrentBalanceSlider(props) {
 
-    const [value, setValue] = React.useState(3);
+    const [value, setValue] = React.useState(Number(useCookies()[0].currentBalance || 3));
 
     const marks = [
         {

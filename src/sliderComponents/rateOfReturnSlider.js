@@ -1,12 +1,11 @@
 import React from 'react'
 import { Slider, Typography, Input, Grid } from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
-
-
+import { useCookies } from 'react-cookie'
 
 function RateOfReturnSlider(props) {
 
-    const [value, setValue] = React.useState(7);
+    const [value, setValue] = React.useState(Number(useCookies()[0].annualRateOfReturn || 7));
 
     const marks = [
         {

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Slider, Typography, Input, Grid } from '@material-ui/core'
 import ValueLabelComponent from './valueLabelComponent'
+import { useCookies } from 'react-cookie'
 
 function EmployerMatchSlider(props) {
 
-    const [value, setValue] = React.useState(25);
+    const [value, setValue] = React.useState(Number(useCookies()[0].employerMatch || 25));
 
     const marks = [
         {

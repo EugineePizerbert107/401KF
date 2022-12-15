@@ -15,25 +15,36 @@ import BarChart from './chart'
 import createNoMatchDatapoints from './createNoMatchDatapoints'
 import createMatchDatapoints from './createMatchDatapoints'
 import createLabels from './createLabels'
-
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 class Display extends React.Component {
 
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
     constructor(props) {
         super(props)
+        
+        const { cookies } = this.props;
+
         this.classes = props.classes
+        
+        console.log( "cookies", cookies)
+
         this.state = {
-            contribPercent: 20,
-            annualSalary: 100000,
-            annualRaise: 5,
-            currentAge: 27,
-            retirementAge: 55,
-            currentBalance: 10000,
-            annualRateOfReturn: 7,
-            riskTolerance: 1,
-            employerMatch: 25,
-            employerMatchCap: 6,
-            employerSetType: `0`,
+            contribPercent: cookies.get('contribPercent') || 20,
+            annualSalary: cookies.get('annualSalary') || 100000,
+            annualRaise: cookies.get('annualRaise') ||5,
+            currentAge: cookies.get('currentAge') ||27,
+            retirementAge: cookies.get('retirementAge') ||55,
+            currentBalance: cookies.get('currentBalance') ||10000,
+            annualRateOfReturn: cookies.get('annualRateOfReturn') ||7,
+            riskTolerance: cookies.get('riskTolerance') ||1,
+            employerMatch: cookies.get('employerMatch') ||25,
+            employerMatchCap: cookies.get('employerMatchCap') ||6,
+            employerSetType: cookies.get('employerSetType') || 0,
         }
 
         this.handleContribSliderChange = this.handleContribSliderChange.bind(this)
@@ -49,44 +60,57 @@ class Display extends React.Component {
     }
 
     handleContribSliderChange(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, contribPercent: val})
+        cookies.set('contribPercent', val)
     }
 
     handleAnnualSalarySliderChange(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, annualSalary: val})
+        cookies.set('annualSalary', val)
     }
 
     handleAnnualRaiseSliderChange(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, annualRaise: val})
+        cookies.set('annualRaise', val)
     }
 
     handleCurrentAgeSlider(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, currentAge: val})
-    }
-
-    handleCurrentAgeSlider(val) {
-        this.setState({...this.state, currentAge: val})
+        cookies.set('currentAge', val)
     }
 
     handleRetirementAgeSlider(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, retirementAge: val})
+        cookies.set('retirementAge', val)
     }
 
     handleCurrentBalanceSlider(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, currentBalance: val})
+        cookies.set('currentBalance', val)
     }
 
     handleRateOfReturnSlider(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, annualRateOfReturn: val})
+        cookies.set('annualRateOfReturn', val)
     }
 
     handleEmployerMatchSlider(val) {
+        const { cookies } = this.props;
         this.setState({...this.state, employerMatch: val})
+        cookies.set('employerMatch', val)
     }
 
     handleEmployerMatchCapSlider(val) {
-        console.log(this.state)
+        const { cookies } = this.props;
         this.setState({...this.state, employerMatchCap: val})
+        cookies.set('employerMatchCap', val)
     }
 
     handleChangeEmployer(val) {
@@ -143,4 +167,4 @@ class Display extends React.Component {
 
 }
 
-export default Display
+export default withCookies(Display)
