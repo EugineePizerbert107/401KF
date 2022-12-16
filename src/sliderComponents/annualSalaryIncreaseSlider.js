@@ -68,7 +68,7 @@ function AnnualSalaryIncreaseSlider(props) {
                         })
                     }}
                     isNumericString
-                    prefix="%"
+                    // prefix="%"
                 />
         )
     }

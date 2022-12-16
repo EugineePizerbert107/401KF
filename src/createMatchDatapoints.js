@@ -6,6 +6,16 @@ export default function({contribPercent, annualSalary, annualRaise, currentAge, 
 
     let totalEarn = 0
 
+    console.log(contribPercent)
+    console.log(annualSalary)
+    console.log(annualRaise)
+    console.log(currentAge)
+    console.log(retirementAge)
+    console.log(currentBalance)
+    console.log(annualRateOfReturn)
+    console.log(employerMatch)
+    console.log(employerMatchCap)
+
     for (let i = 0; i < retirementAge - currentAge; i++) {
 
         let effectiveRaiseForYear = (1 + (annualRaise/100)) ** i
@@ -20,20 +30,21 @@ export default function({contribPercent, annualSalary, annualRaise, currentAge, 
 
         let startingBalance = i === 0 ? currentBalance : valArray[i-1]
 
-        let realEmployerMatchPercent = contribPercent > employerMatchCap ? employerMatchCap : contribPercent
+        let realEmployerMatchPercent = employerMatchCap; //contribPercent > employerMatchCap ? employerMatchCap : contribPercent
 
         let employerContribution = yearlySalary * (realEmployerMatchPercent/100) * (employerMatch/100)
 
         let endOfYearTotalBeforeInterest = startingBalance + employeeContribition + employerContribution
 
         let endOfYearTotalAfterInterest = endOfYearTotalBeforeInterest * (1 + (annualRateOfReturn/100))
-
-        totalEarn += endOfYearTotalAfterInterest
+        
+        console.log(endOfYearTotalBeforeInterest)
 
         valArray.push(endOfYearTotalAfterInterest)
 
-    }
+        totalEarn = endOfYearTotalAfterInterest
 
+    }
     data["totalEarn"] = totalEarn
     data["valArray"] = valArray
 
