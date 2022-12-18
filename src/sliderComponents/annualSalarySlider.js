@@ -104,7 +104,7 @@ function SalarySlider(props) {
                             <span style={{marginTop: 8, marginBottom: 4}}>$</span>
                             <TextField
                                 value={parseInt(value/52/40)}
-                                onChange={handleInputChange}
+                                onChange={handleInputChangeHour}
                                 margin="dense"
                                 fullWidth
                                 name="numberformat"
@@ -127,7 +127,7 @@ function SalarySlider(props) {
                             <span style={{marginTop: 8, marginBottom: 4}}>$</span>
                             <TextField
                                 value={parseInt(value/52*2)}
-                                onChange={handleInputChange}
+                                onChange={handleInputChangeBiWeek}
                                 margin="dense"
                                 fullWidth
                                 name="numberformat"

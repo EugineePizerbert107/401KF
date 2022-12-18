@@ -68,7 +68,7 @@ function ContribSlider(props) {
                             onChange={handleInputChange}
                             onBlur={handleBlur}
                             inputProps={{
-                                step: 10,
+                                step: 5,
                                 min: 0,
                                 max: 25,
                                 type: 'number',
